@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import NavBar from './components/Navbar';
+import Welcome from './pages/Welcome';
+import ClientSearch from './pages/ClientSearch';
+import ClientAdd from './pages/ClientAdd';
+import MedicineSearch from './pages/MedicineSearch';
+import MedicineAdd from './pages/MedicineAdd';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <NavBar />
+      <div className="container mt-3">
+        <Routes>
+          <Route path="/" element={<Welcome />} />
+          <Route path="/clients/search" element={<ClientSearch />} />
+          <Route path="/clients/add" element={<ClientAdd />} />
+          <Route path="/medicines/search" element={<MedicineSearch />} />
+          <Route path="/medicines/add" element={<MedicineAdd />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
