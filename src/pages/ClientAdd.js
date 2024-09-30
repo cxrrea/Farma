@@ -1,30 +1,39 @@
 // src/pages/ClientAdd.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ClientAdd() {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [symptom, setSymptom] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    axios.post('http://localhost:5000/clients', { name, age, symptom })
-      .then(response => {
-        alert('Cliente adicionado com sucesso!');
-        setName('');
-        setAge('');
-        setSymptom('');
-      })
-      .catch(error => console.error('Error adding client:', error));
+    try {
+      await axios.post('http://localhost:5000/clients', {
+        name,
+        age,
+        symptom,
+      });
+      toast.success('Cliente adicionado com sucesso!');
+      // Limpar o formulário
+      setName('');
+      setAge('');
+      setSymptom('');
+    } catch (error) {
+      toast.error('Erro ao adicionar cliente.');
+      console.error('Error adding client:', error);
+    }
   };
 
   return (
     <div>
       <h2>Cadastro de Clientes</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Nome</label>
+        <div className="mb-3">
+          <label className="form-label">Nome</label>
           <input
             type="text"
             className="form-control"
@@ -33,8 +42,8 @@ function ClientAdd() {
             required
           />
         </div>
-        <div className="form-group">
-          <label>Idade</label>
+        <div className="mb-3">
+          <label className="form-label">Idade</label>
           <input
             type="number"
             className="form-control"
@@ -43,8 +52,8 @@ function ClientAdd() {
             required
           />
         </div>
-        <div className="form-group">
-          <label>Sintoma</label>
+        <div className="mb-3">
+          <label className="form-label">Sintoma</label>
           <input
             type="text"
             className="form-control"
@@ -55,6 +64,7 @@ function ClientAdd() {
         </div>
         <button type="submit" className="btn btn-primary">Cadastrar</button>
       </form>
+      <ToastContainer />
     </div>
   );
 }

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 function NavBar() {
   return (
     <Navbar bg="light" expand="lg">
-      <Navbar.Brand as={Link} to="/">Farmácia</Navbar.Brand>
+      <Navbar.Brand as={Link} to="/">FarmaEasy</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
@@ -15,8 +15,8 @@ function NavBar() {
             <NavDropdown.Item as={Link} to="/clients/add">Cadastro de Clientes</NavDropdown.Item>
           </NavDropdown>
           <NavDropdown title="Remédios" id="basic-nav-dropdown">
-            <NavDropdown.Item as={Link} to="/medicines/search">Pesquisa de Remédios</NavDropdown.Item>
-            <NavDropdown.Item as={Link} to="/medicines/add">Cadastro de Remédios</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/medicines/search">Buscar Fórmula</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/medicines/add">Cadastro de Fórmula</NavDropdown.Item>
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>

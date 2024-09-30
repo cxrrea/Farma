@@ -1,57 +1,56 @@
-// src/pages/MedicineAdd.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function MedicineAdd() {
-  const [commercialName, setCommercialName] = useState('');
-  const [genericName, setGenericName] = useState('');
+  const [name, setName] = useState('');
+  const [formula, setFormula] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [symptoms, setSymptoms] = useState('');
-  const [message, setMessage] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/medicines', {
-        commercial_name: commercialName,
-        generic_name: genericName,
-        ingredients: ingredients,
-        symptoms: symptoms,
+      await axios.post('http://localhost:5000/medicines', {
+        name,
+        formula,
+        ingredients,
+        symptoms,
       });
-      setMessage(`Medicamento adicionado com sucesso! ID: ${response.data.id}`);
+      toast.success('Medicamento adicionado com sucesso!');
       // Limpar o formulário
-      setCommercialName('');
-      setGenericName('');
+      setName('');
+      setFormula('');
       setIngredients('');
       setSymptoms('');
     } catch (error) {
-      setMessage('Erro ao adicionar medicamento.');
-      console.error(error);
+      toast.error('Erro ao adicionar medicamento.');
+      console.error('Error adding medicine:', error);
     }
   };
 
   return (
     <div>
-      <h2>Cadastro de Remédios</h2>
+      <h2>Cadastro de Fórmula</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label className="form-label">Nome Comercial</label>
+          <label className="form-label">Nome</label>
           <input
             type="text"
             className="form-control"
-            value={commercialName}
-            onChange={(e) => setCommercialName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
           />
         </div>
         <div className="mb-3">
-          <label className="form-label">Nome Genérico</label>
+          <label className="form-label">Fórmula</label>
           <input
             type="text"
             className="form-control"
-            value={genericName}
-            onChange={(e) => setGenericName(e.target.value)}
-            required
+            value={formula}
+            onChange={(e) => setFormula(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -61,7 +60,6 @@ function MedicineAdd() {
             className="form-control"
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
-            required
           />
         </div>
         <div className="mb-3">
@@ -71,12 +69,11 @@ function MedicineAdd() {
             className="form-control"
             value={symptoms}
             onChange={(e) => setSymptoms(e.target.value)}
-            required
           />
         </div>
-        <button type="submit" className="btn btn-primary">Adicionar Medicamento</button>
+        <button type="submit" className="btn btn-primary">Cadastrar</button>
       </form>
-      {message && <p className="mt-3">{message}</p>}
+      <ToastContainer />
     </div>
   );
 }
