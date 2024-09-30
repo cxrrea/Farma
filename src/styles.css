@@ -1,0 +1,41 @@
+.container {
+    max-width: 900px;
+  }
+
+  .navbar {
+    margin-bottom: 20px;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+  
+  .nav-link {
+    font-size: 1.1rem;
+    margin-right: 15px;
+  }
+  
+  .nav-link:hover {
+    background-color: #0056b3;
+    border-radius: 5px;
+  }
+  
+  
+  h2 {
+    color: #2c3e50;
+  }
+  
+  table {
+    margin-top: 20px;
+  }
+  
+  form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  button {
+    margin-top: 10px;
+  }
+  
